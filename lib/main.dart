@@ -5,7 +5,7 @@ import 'package:soundsense/src/screens/register_page.dart';
 import 'src/screens/chat_page.dart';
 import 'src/screens/conversation_page.dart';
 import 'src/screens/home_page.dart';
-import 'src/screens/musig_page.dart';
+import 'src/screens/music_page.dart';
 import 'src/widgets/navbar_builder.dart';
 
 void main() {

@@ -5,7 +5,7 @@ import 'package:soundsense/src/constants/colors.dart';
 
 import '../screens/chat_page.dart';
 import '../screens/home_page.dart';
-import '../screens/musig_page.dart';
+import '../screens/music_page.dart';
 import '../screens/notifications_page.dart';
 
 class MyNavBar extends StatefulWidget {

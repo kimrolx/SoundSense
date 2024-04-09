@@ -53,9 +53,12 @@ class RegisterPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    CupertinoIcons.back,
-                    size: width * 0.08,
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(CupertinoIcons.back),
+                    iconSize: width * 0.08,
                     color: white,
                   ),
                   Center(
