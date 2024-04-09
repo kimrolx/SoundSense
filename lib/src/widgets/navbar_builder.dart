@@ -20,8 +20,8 @@ class _MyNavBarState extends State<MyNavBar> {
 
   final screens = [
     const HomePage(),
-    const ChatPage(),
     const MusicPage(),
+    const ChatPage(),
     const NotificationsPage(),
   ];
 
@@ -29,6 +29,7 @@ class _MyNavBarState extends State<MyNavBar> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: IndexedStack(
         index: currentIndex,
@@ -57,15 +58,15 @@ class _MyNavBarState extends State<MyNavBar> {
               ),
               GButton(
                 icon: CupertinoIcons.double_music_note,
-                text: 'Chat',
-              ),
-              GButton(
-                icon: CupertinoIcons.chat_bubble,
                 text: 'Music',
               ),
               GButton(
+                icon: CupertinoIcons.chat_bubble,
+                text: 'Chat',
+              ),
+              GButton(
                 icon: CupertinoIcons.person_alt_circle_fill,
-                text: 'Notifications',
+                text: 'Profile',
               ),
             ],
           ),

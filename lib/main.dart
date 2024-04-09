@@ -3,6 +3,7 @@ import 'package:soundsense/src/screens/login_page.dart';
 import 'package:soundsense/src/screens/register_page.dart';
 
 import 'src/screens/chat_page.dart';
+import 'src/screens/conversation_page.dart';
 import 'src/screens/home_page.dart';
 import 'src/screens/musig_page.dart';
 import 'src/widgets/navbar_builder.dart';
@@ -25,6 +26,7 @@ class MainApp extends StatelessWidget {
         '/register': (context) => const RegisterPage(),
         '/home': (context) => const HomePage(),
         '/chat': (context) => const ChatPage(),
+        '/conversation': (context) => const ConversationPage(),
         '/music': (context) => const MusicPage(),
       },
     );
