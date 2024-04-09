@@ -35,7 +35,7 @@ class _MyNavBarState extends State<MyNavBar> {
         children: screens,
       ),
       bottomNavigationBar: Container(
-        color: parchmentWhite,
+        color: navbar,
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: width * 0.018,
@@ -43,7 +43,7 @@ class _MyNavBarState extends State<MyNavBar> {
           ),
           child: GNav(
             selectedIndex: currentIndex,
-            backgroundColor: parchmentWhite,
+            backgroundColor: navbar,
             color: grayFont,
             activeColor: theme,
             tabBackgroundColor: Colors.grey.shade200,
@@ -52,15 +52,15 @@ class _MyNavBarState extends State<MyNavBar> {
             onTabChange: (index) => setState(() => currentIndex = index),
             tabs: const [
               GButton(
-                icon: CupertinoIcons.house_fill,
+                icon: CupertinoIcons.home,
                 text: 'Home',
               ),
               GButton(
-                icon: CupertinoIcons.book_fill,
+                icon: CupertinoIcons.double_music_note,
                 text: 'Chat',
               ),
               GButton(
-                icon: CupertinoIcons.cart_fill,
+                icon: CupertinoIcons.chat_bubble,
                 text: 'Music',
               ),
               GButton(

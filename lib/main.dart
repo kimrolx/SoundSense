@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:soundsense/src/screens/login_page.dart';
+import 'package:soundsense/src/screens/register_page.dart';
+
 import 'src/screens/chat_page.dart';
 import 'src/screens/home_page.dart';
 import 'src/screens/musig_page.dart';
-import 'src/screens/onboarding_page.dart';
 import 'src/widgets/navbar_builder.dart';
 
 void main() {
@@ -16,12 +18,14 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const OnboardingPage(),
+      home: const LoginPage(),
       routes: {
-        '/navbar': (context) => const MyNavBar(),
-        '/homepage': (context) => const HomePage(),
-        '/chatpage': (context) => const ChatPage(),
-        '/musicpage': (context) => const MusicPage(),
+        '/nav': (context) => const MyNavBar(),
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegisterPage(),
+        '/home': (context) => const HomePage(),
+        '/chat': (context) => const ChatPage(),
+        '/music': (context) => const MusicPage(),
       },
     );
   }

@@ -24,7 +24,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     OnboardingContent onboardingContent = OnboardingContent();
 
     return Scaffold(
-      backgroundColor: parchmentWhite,
+      backgroundColor: ivoryWhite,
       body: Stack(
         children: [
           Container(
@@ -40,7 +40,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             child: Container(
               height: height * 0.45,
               decoration: BoxDecoration(
-                color: parchmentWhite,
+                color: ivoryWhite,
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(30),
                 ),
@@ -85,7 +85,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: theme,
                             elevation: 1.0,
-                            foregroundColor: parchmentWhite,
+                            foregroundColor: ivoryWhite,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -95,7 +95,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             style: GoogleFonts.inter(
                               fontSize: width * 0.045,
                               fontWeight: FontWeight.w700,
-                              color: parchmentWhite,
+                              color: ivoryWhite,
                             ),
                           ),
                         ),

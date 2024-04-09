@@ -12,8 +12,11 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_svg: ^2.0.10+1
   gap: ^3.0.1
-  google_fonts: 6.1.0
+  google_fonts: ^6.1.0
   google_nav_bar: ^5.0.6
+  record: ^5.0.5
+  syncfusion_flutter_gauges: ^25.1.39
+  fl_chart: ^0.67.0
     
 
 dev_dependencies:
