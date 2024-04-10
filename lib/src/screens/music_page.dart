@@ -13,7 +13,9 @@ class MusicPage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: ivoryWhite,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(

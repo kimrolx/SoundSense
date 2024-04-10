@@ -6,7 +6,7 @@ import 'package:soundsense/src/constants/colors.dart';
 import '../screens/chat_page.dart';
 import '../screens/home_page.dart';
 import '../screens/music_page.dart';
-import '../screens/notifications_page.dart';
+import '../screens/profile_page.dart';
 
 class MyNavBar extends StatefulWidget {
   const MyNavBar({super.key});
@@ -22,7 +22,7 @@ class _MyNavBarState extends State<MyNavBar> {
     const HomePage(),
     const MusicPage(),
     const ChatPage(),
-    const NotificationsPage(),
+    const ProfilePage(),
   ];
 
   @override
