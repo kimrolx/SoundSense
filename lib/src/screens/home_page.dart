@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
         await _recorder.startStream(recordConfig);
 
         _timer =
-            Timer.periodic(const Duration(milliseconds: 20), (timer) async {
+            Timer.periodic(const Duration(milliseconds: 10), (timer) async {
           final amplitude = await _recorder.getAmplitude();
           final rawVolume = amplitude.current.toDouble();
 
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
           } else if (rawVolume >= 0) {
             dbValue = 120;
           } else {
-            dbValue = (rawVolume + 20) * (50 / 20) + 25;
+            dbValue = (rawVolume + 30) * (50 / 20) + 25;
           }
 
           setState(() {
@@ -73,10 +73,10 @@ class _HomePageState extends State<HomePage> {
             _volumeSpots.add(FlSpot(_volumeSpots.length.toDouble(), dbValue));
           });
 
-          if (dbValue >= 65 && dbValue <= 80 && !_isDialogShown) {
+          if (dbValue >= 67 && !_isDialogShown) {
             _startTime ??= DateTime.now();
 
-            if (DateTime.now().difference(_startTime!).inSeconds >= 5) {
+            if (DateTime.now().difference(_startTime!).inSeconds >= 3) {
               _showCustomDialogAndVibrate();
               _startTime = null;
             }
@@ -109,12 +109,10 @@ class _HomePageState extends State<HomePage> {
   Future<void> _showCustomDialogAndVibrate() async {
     _isDialogShown = true;
 
-    // Check if the device can vibrate
     if (await Vibration.hasVibrator() ?? false) {
       Vibration.vibrate(pattern: [500, 10000], repeat: 0);
     }
 
-    // Show dialog
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -176,11 +174,16 @@ class _HomePageState extends State<HomePage> {
                       color: const Color.fromRGBO(184, 106, 138, 1.0),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Text(
-                      'Maximum dB Value: ${_maxDbValue.toStringAsFixed(2)}',
-                      style: GoogleFonts.inter(
-                        fontSize: width * 0.04,
-                        fontWeight: FontWeight.w400,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          'Max dbReached: ${_maxDbValue.toStringAsFixed(2)}',
+                          style: GoogleFonts.inter(
+                            fontSize: width * 0.05,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -213,36 +216,80 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                //* Radial Gauge
-                width: width * 0.85,
-                height: height * 0.25,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(184, 106, 138, 1.0),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: SfRadialGauge(
-                  axes: [
-                    RadialAxis(
-                      showLabels: false,
-                      showAxisLine: false,
-                      showTicks: false,
-                      minimum: 0,
-                      maximum: 120,
-                      ranges: [
-                        myGauge(0, 30, Colors.green, 'Quiet', width, height),
-                        myGauge(30, 60, Colors.yellow, 'Moderately Quiet',
-                            width, height),
-                        myGauge(60, 90, Colors.orange, 'Loud', width, height),
-                        myGauge(
-                            90, 120, Colors.red, 'Very Loud', width, height),
-                      ],
-                      pointers: [
-                        NeedlePointer(value: _currentVolume),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+                  //* Radial Gauge
+                  width: width * 0.85,
+                  height: height * 0.25,
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(184, 106, 138, 1.0),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: SfRadialGauge(
+                    axes: [
+                      RadialAxis(
+                        minimum: 0,
+                        maximum: 120,
+                        showLabels: true,
+                        showAxisLine: true,
+                        showTicks: true,
+                        axisLabelStyle: const GaugeTextStyle(fontSize: 0),
+                        axisLineStyle: const AxisLineStyle(
+                            thickness: 0.2,
+                            thicknessUnit: GaugeSizeUnit.factor),
+                        tickOffset: 0.32,
+                        labelOffset: 5,
+                        labelsPosition: ElementsPosition.outside,
+                        ticksPosition: ElementsPosition.outside,
+                        minorTicksPerInterval: 0,
+                        majorTickStyle: const MajorTickStyle(
+                          length: 0.1,
+                          lengthUnit: GaugeSizeUnit.factor,
+                          thickness: 1.5,
+                        ),
+                        annotations: <GaugeAnnotation>[
+                          GaugeAnnotation(
+                            widget: Text(
+                              '0db',
+                              style: TextStyle(
+                                  fontSize: width * 0.05,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            angle: 140,
+                            positionFactor: 1.25,
+                          ),
+                          GaugeAnnotation(
+                            widget: Text(
+                              '120db',
+                              style: TextStyle(
+                                  fontSize: width * 0.05,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            angle: 40,
+                            positionFactor: 1.25,
+                          ),
+                          GaugeAnnotation(
+                            widget: Text(
+                              '${_currentVolume.toStringAsFixed(2)} dB',
+                              style: TextStyle(
+                                  fontSize: width * 0.05,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            angle: 90,
+                            positionFactor: 0.6,
+                          ),
+                        ],
+                        ranges: [
+                          myGauge(0, 15, Colors.green, width, height),
+                          myGauge(15, 35, Colors.lightGreen, width, height),
+                          myGauge(35, 55, Colors.yellow, width, height),
+                          myGauge(55, 75, Colors.orange, width, height),
+                          myGauge(75, 95, Colors.redAccent, width, height),
+                          myGauge(95, 120, Colors.red, width, height),
+                          // Add other ranges here
+                        ],
+                        pointers: [NeedlePointer(value: _currentVolume)],
+                      ),
+                    ],
+                  )),
             ],
           ),
         ),
@@ -252,12 +299,11 @@ class _HomePageState extends State<HomePage> {
 }
 
 GaugeRange myGauge(double startValue, double endValue, Color color,
-    String label, double width, double height) {
+    double width, double height) {
   return GaugeRange(
     startValue: startValue,
     endValue: endValue,
     color: color,
-    label: label,
     sizeUnit: GaugeSizeUnit.factor,
     labelStyle: GaugeTextStyle(fontFamily: 'Times', fontSize: width * 0.035),
     startWidth: 0.4,
